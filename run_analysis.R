@@ -1,12 +1,14 @@
 library(dplyr)
 library(readr)
 
+##First part of the script
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 fileDIR <- "./rawfiles"
 
 download.file(fileURL, destfile = "./Dataset.zip")
 unzip("./Dataset.zip",exdir = fileDIR)
 
+##Second part of the script
 #Features
 features <- read_table2("rawfiles/UCI HAR Dataset/features.txt", col_names = FALSE)
 colnames(features) <- c("activityNumber","activityNames")
@@ -33,6 +35,8 @@ trainDATA <- cbind(subject_train,y_train,X_train)
 DATA <- rbind(testDATA,trainDATA)
 colnames(DATA) <- c("subject","labels",features$activityNames)
 
+
+##Third part of the script
 #select only column for the measurements on the mean and standard deviation
 select.colnames <- grep("mean\\(\\)|std\\(\\)",colnames(DATA),value = TRUE)
 
@@ -46,6 +50,7 @@ levels(DATAselected$labels) <- descriptiveLabels
 DATAselected <- as_tibble(DATAselected)
 ## DATAselected is the dataset asked for in step 4
 
+##Forth part of the script
 #creating a tidy dataset with the average of each variable for each activity and each subject
 library(reshape2)
 DATAmelted <- melt(DATAselected,c("labels","subject"),measure.vars = select.colnames, value.name = "value")
