@@ -27,3 +27,7 @@ character, as the raw data codebook.
 
 - variables including "mean()" and "std()": 
 The "average" of those variables in the raw dataset.
+
+#Source Data
+Data + Description can be found here
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
